@@ -36,3 +36,4 @@ The easiest way to deploy your Next.js app is to use the Vercel Platform from th
 ## Contributing
 
 We welcome contributions to the LinkedIn Post Generator! Please feel free to submit pull requests, or open issues to discuss potential changes or fixes.
+# LinkedinPostGenerator
