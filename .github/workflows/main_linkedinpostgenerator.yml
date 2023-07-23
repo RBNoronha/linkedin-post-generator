@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'linkedinpostgenerator'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_8341acb8846c439f882197df0a010547 }}
+          publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
           package: .
