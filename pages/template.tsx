@@ -32,7 +32,7 @@ export default function Home() {
   });
   const [post, setPost] = useState<string>("");
   const [media, setMedia] = useState<boolean>(false);
-  const [vibe, setVibe] = useState<VibeType>("Story");
+  const [vibe, setVibe] = useState<VibeType>("História");
   const [showPopup, setShowPopup] = useState(false);
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
   const [customPrompt, setCustomPrompt] = useState("");
@@ -50,43 +50,33 @@ export default function Home() {
     }
   };
 
-  // const [hasVideo, setHasVideo] = useState<boolean>(false);
-  // const [hasCarousel, setHasCarousel] = useState<boolean>(false);
-
   useEffect(() => {
     const rankResponse = rank(post, media);
     setRanking(rankResponse);
   }, [post, media]);
 
-  // prompt for optimizing post
-
-  // add more vibes as needed
   const handlePrompt = () => {
-    // Ensure both "post" and "note" have values before proceeding
     if (!post || !input) {
-      return; // Or handle this case differently, based on your needs
+      return; // Ou tratar esse caso de forma diferente, conforme suas necessidades
     }
 
-    // Now you can use both variables to construct your prompt
-    const prompt = `You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. 
+    const prompt = `Você é um LinkedinGPT, um modelo de linguagem avançado que gera postagens virais para o Linkedin.
 
-Your task is to generate a new post for a topic provided in ${post}. This post should follow the style and format observed in the example posts contained in ${input}. However, the content or specific topics of these example posts should not be reflected in your generated posts.
+Sua tarefa é gerar uma nova postagem para um tópico fornecido em ${post}. Esta postagem deve seguir o estilo e formato observados nas postagens de exemplo contidas em ${input}. No entanto, o conteúdo ou tópicos específicos dessas postagens de exemplo não devem ser refletidos em suas postagens geradas.
 
-When analyzing the ${input}, pay close attention to the person's writing style and the structure of their posts. Identify and imitate the patterns of spacing between lines, use of emojis, incorporation of questions, and other stylistic choices. Also, consider the average length of their posts.
+Ao analisar o ${input}, preste atenção ao estilo de escrita da pessoa e à estrutura de suas postagens. Identifique e imite os padrões de espaçamento entre linhas, uso de emojis, incorporação de perguntas e outras escolhas estilísticas. Além disso, considere o comprimento médio das postagens.
 
-When creating a new post, ensure it is centered around the topic provided in the ${post}, maintaining the observed style and format from the ${input}. Create a post that would resonate with the same audience and yet offer fresh, engaging content on the new topic.`;
+Ao criar uma nova postagem, garanta que ela esteja centrada no tópico fornecido em ${post}, mantendo o estilo e formato observados no ${input}. Crie uma postagem que ressoe com o mesmo público e ofereça conteúdo novo e envolvente sobre o novo tópico.`;
 
     return prompt;
   };
 
-  // function to send post to OpenAI and get response
   const optimizePost = async (e: any) => {
     e.preventDefault();
     setOptimizedPost("");
     setLoading(true);
     const prompt = handlePrompt();
 
-    // Show the popup right before the API call
     handleButtonClick();
 
     const response = await fetch("/api/optimize", {
@@ -103,7 +93,6 @@ When creating a new post, ensure it is centered around the topic provided in the
       throw new Error(response.statusText);
     }
 
-    // This data is a ReadableStream
     const data = response.body;
     if (!data) {
       return;
@@ -126,24 +115,24 @@ When creating a new post, ensure it is centered around the topic provided in the
   return (
     <>
       <Head>
-        <title>LinkedIn Post Generator</title>
+        <title>Gerador de Postagem Linkedin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="👩‍💼" />
         <meta
           name="description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="Veja como sua postagem se sai em relação ao algoritmo do LinkedIn e gere uma postagem melhor com IA."
         />
-        <meta property="og:site_name" content="#1 Post Generator 🚀  " />
+        <meta property="og:site_name" content="#1 Post Generator 🚀" />
         <meta
           property="og:description"
-          content="See how your post performs against LinkedIn alghoritm and generate better post with AI."
+          content="Veja como sua postagem se sai em relação ao algoritmo do LinkedIn e gere uma postagem melhor com IA."
         />
-        <meta property="og:title" content="LinkedIn Post Generator with AI" />
+        <meta property="og:title" content="LinkedIn Post Generator com IA" />
         <meta name="linkedin:card" content="summary_large_image" />
-        <meta name="linkedin:title" content="Linkedin Post Generator" />
+        <meta name="linkedin:title" content="Gerador de Postagens do LinkedIn" />
         <meta
           name="linkedin:description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="Veja como sua postagem se sai em relação ao algoritmo do LinkedIn e gere uma postagem melhor com IA."
         />
         <meta
           property="og:image"
@@ -158,29 +147,26 @@ When creating a new post, ensure it is centered around the topic provided in the
       <main>
         <Nav />
 
-        <section className="py-10 lg:py-20 ">
-          {/* bg-[url('/image1.svg')] */}
-          <div className="px-4 ">
+        <section className="py-10 lg:py-20">
+          <div className="px-4">
             <div className="max-w-5xl mx-auto text-center">
-              <div className="w-full mx-auto mb-6 ">
+              <div className="w-full mx-auto mb-6">
                 <a
                   // href="https://vercel.fyi/roomGPT"
                   target="_blank"
                   rel="noreferrer"
                   className="border border-gray-700 rounded-lg py-2 px-4 text-gray-400 text-sm mb-8 transition duration-300 ease-in-out"
                 >
-                  40.000 amazing posts generated 💫
-                  {/* {" "}
-                  <span className="text-blue-600">Vercel</span> */}
+                  40.000 postagens incríveis geradas 💫
                 </a>
               </div>
 
-              <h1 className="text-6xl text-center font-bold pb-1 text-slate-900  ">
-                Linkedin Post Generator 🚀
+              <h1 className="text-6xl text-center font-bold pb-1 text-slate-900">
+                Gerador de Postagens do LinkedIn 🚀
               </h1>
               <p className="mt-3 mb-10 text-center">
-                See how your post performs and generate a better one with AI.
-                Time to go viral. <br />
+                Veja como sua postagem se sai e gere uma melhor com IA.
+                É hora de viralizar. <br />
               </p>
 
               <div className="flex flex-col md:flex-row w-full md:space-x-20">
@@ -221,7 +207,7 @@ When creating a new post, ensure it is centered around the topic provided in the
                       className="bg-blue-700 font-medium rounded-md w-full text-white px-4 py-2 hover:bg-blue-600 disabled:bg-blue-800"
                     >
                       {loading && <LoadingDots color="white" style="large" />}
-                      {!loading && `Generate new post `}
+                      {!loading && `Gerar nova postagem`}
                     </button>
 
                     <Popup show={showPopup} setShowPopup={setShowPopup} />
@@ -237,7 +223,7 @@ When creating a new post, ensure it is centered around the topic provided in the
                     <div className="my-1">
                       <div className="flex justify-between items-center pb-2 border-b border-gray-300">
                         <h2 className="text-xl font-bold">
-                          Your Generated Post
+                          Sua Postagem Gerada
                         </h2>
                       </div>
                       <div className="max-w-2xl my-4 mx-auto">
@@ -251,7 +237,7 @@ When creating a new post, ensure it is centered around the topic provided in the
                                 }),
                               }),
                             ]);
-                            toast("Post copied to clipboard", {
+                            toast("Postagem copiada para a área de transferência", {
                               icon: "📋",
                             });
                           }}

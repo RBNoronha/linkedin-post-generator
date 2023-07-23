@@ -1,17 +1,18 @@
 import { Dispatch, SetStateAction } from "react";
 
-interface NoteProps {
+interface PropsNote {
   note: string;
   setNote: Dispatch<SetStateAction<string>>;
 }
-export const Note = ({ note, setNote }: NoteProps) => {
+
+const Note = ({ note, setNote }: PropsNote) => {
   return (
     <>
       <div className="w-full">
         <textarea
           maxLength={10000}
           onChange={(e) => setNote(e.target.value)}
-          placeholder="Add your custom prompt according to which the post for linkedin should be generated"
+          placeholder="Adicione sua própria descrição personalizada de acordo com a qual o post para o LinkedIn deve ser gerado"
           className="text-black w-full h-24 p-2 text-s bg-white border border-gray-300 rounded-md shadow-inner md:h-240"
         />
       </div>
@@ -20,3 +21,5 @@ export const Note = ({ note, setNote }: NoteProps) => {
     </>
   );
 };
+
+export default Note;

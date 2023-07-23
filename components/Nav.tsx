@@ -9,7 +9,7 @@ export default function Nav() {
             <div className="flex items-center text-base ">
               <a
                 target="_blank"
-                href="https://www.linkedin.com/in/iuliia-shnai/"
+                href="https://www.linkedin.com/in/RenanBesserra/"
                 rel="noreferrer"
                 className="text-white flex max-w-fit items-center justify-center space-x-2 text-xl"
               >

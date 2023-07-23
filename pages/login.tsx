@@ -22,10 +22,10 @@ export default function Login() {
       <div className="z-10 mt-[calc(30vh)] h-fit w-full max-w-md overflow-hidden border border-blue-900 rounded-lg sm:shadow-xl">
         <div className="flex flex-col items-center justify-center space-y-3 bg-blue-900 px-4 py-6 pt-8 text-center sm:px-16">
           <h3 className="text-xl text-white font-semibold">
-            Sign in to Linkedin Post Generator
+            Acesse o Gerador de Postagens do LinkedIn
           </h3>
           <p className="text-sm text-gray-400">
-            Start generating posts with no limitations
+            Comece a gerar postagens sem limitações
           </p>
         </div>
         <div className="flex flex-col bg-blue-900 px-4 py-8 sm:px-16">
@@ -37,7 +37,7 @@ export default function Login() {
             }}
             className="rounded px-10 py-2 font-medium transition-colors text-gray-900 bg-gray-100 hover:text-gray-100 hover:bg-gray-500"
           >
-            Continue with Google
+            Continuar com o Google
           </button>
         </div>
       </div>

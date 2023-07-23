@@ -31,14 +31,14 @@ export default function Home() {
   });
   const [post, setPost] = useState<string>("");
   const [media, setMedia] = useState<boolean>(false);
-  const [vibe2, setVibe2] = useState<VibeType2>("➕ Add Hashtags");
+  const [vibe2, setVibe2] = useState<VibeType2>("➕ Adicionar Hashtags");
   const [showPopup, setShowPopup] = useState(false);
-  const [tab, setTab] = useState("enhancer"); // Default to "vibe" tab
+  const [tab, setTab] = useState("enhancer"); // Padrão é a guia "vibe"
   const { data: session, status } = useSession();
   const clickCount = useRef(0);
 
   const handleButtonClick = () => {
-    clickCount.current += 1; // Increment clickCount on each click
+    clickCount.current += 1; // Incrementa o clickCount a cada clique
     if (status !== "authenticated" && clickCount.current >= 3) {
       setTimeout(() => {
         setShowPopup(true);
@@ -54,44 +54,42 @@ export default function Home() {
     setRanking(rankResponse);
   }, [post, media]);
 
-  // prompt for optimizing post
+  // Prompt para otimização do post
 
-  // add more vibes as needed
+  // Adicionar mais opções de vibração conforme necessário
   const handlePrompt = () => {
     let prompt;
     switch (vibe2) {
-      case "➕ Add Hashtags":
-        prompt = `Transform the following LinkedIn post by adding three popular and relevant hashtags. Original post: "${post}". Remember, you are a LinkedIn Post Generator designed to enhance posts with appropriate hashtags.`;
+      case "➕ Adicionar Hashtags":
+        prompt = `Transforme o seguinte post do LinkedIn, adicionando três hashtags populares e relevantes. Post original: "${post}". Lembre-se de que você é um Gerador de Postagens do LinkedIn projetado para melhorar postagens com hashtags apropriadas.`;
         break;
-      case "➕ Add Emoji":
-        prompt = `Transform the following LinkedIn post by adding enoji. Original post: "${post}". Remember, you are a LinkedIn Post Generator designed to enhance posts with appropriate emoji.`;
-
+      case "➕ Adicionar Emoji":
+        prompt = `Transforme o seguinte post do LinkedIn, adicionando emojis. Post original: "${post}". Lembre-se de que você é um Gerador de Postagens do LinkedIn projetado para melhorar postagens com emojis apropriados.`;
         break;
-      case "➕ Add a List":
-        prompt = `You are the LinkedIn Post Generator, and your mission is to enrich existing LinkedIn posts by incorporating relevant list that align with the post's topic. Consider the following original post:  "${post}". Your task is to seamlessly weave in an appropriate list to elevate the content. The length of each list line should not be more than 100 characters. Remember, your goal is to make as minimum changes as possible to post.`;
-
+      case "➕ Adicionar uma Lista":
+        prompt = `Você é o Gerador de Postagens do LinkedIn e sua missão é enriquecer postagens existentes do LinkedIn, incorporando listas relevantes que se alinhem ao tópico da postagem. Considere o seguinte post original: "${post}". Sua tarefa é integrar uma lista apropriada para melhorar o conteúdo. O comprimento de cada linha da lista não deve ser superior a 100 caracteres. Lembre-se de que seu objetivo é fazer o mínimo de alterações possível na postagem.`;
         break;
-      case "➕ Add Stats":
-        prompt = `You are the LinkedIn Post Generator, and your mission is to enrich existing LinkedIn posts by incorporating relevant statistics with numbers that align with the post's topic. Consider the following original post:  "${post}". Your task is to seamlessly weave in an appropriate numbers to elevate the content. Remember, your goal is to make as minimum changes as possible to post.`;
+      case "➕ Adicionar Estatísticas":
+        prompt = `Você é o Gerador de Postagens do LinkedIn e sua missão é enriquecer postagens existentes do LinkedIn, incorporando estatísticas relevantes com números que se alinhem ao tópico da postagem. Considere o seguinte post original: "${post}". Sua tarefa é integrar números apropriados para melhorar o conteúdo. Lembre-se de que seu objetivo é fazer o mínimo de alterações possível na postagem.`;
         break;
-      case "➕ Add a Question":
-        prompt = `As the LinkedIn Post Generator, your task is to stimulate engagement by integrating a thought-provoking question into the following post: "${post}". The question, crafted to ignite discussion, can be positioned either as the initial or final line of the post. Ensure that the question you introduce aligns with the post's context and has the potential to make the post more engaging. Remember, your aim to make minimal changes, so show the question and post together.`;
+      case "➕ Adicionar uma Pergunta":
+        prompt = `Como Gerador de Postagens do LinkedIn, sua tarefa é estimular o engajamento, integrando uma pergunta instigante no seguinte post: "${post}". A pergunta, criada para iniciar uma discussão, pode ser posicionada como a primeira ou última linha da postagem. Certifique-se de que a pergunta que você introduz esteja alinhada ao contexto da postagem e tenha o potencial de tornar a postagem mais envolvente. Lembre-se de que seu objetivo é fazer o mínimo de alterações, então mostre a pergunta e a postagem juntas.`;
         break;
       default:
-        prompt = `Default prompt for optimizing post`;
+        prompt = `Prompt padrão para otimização do post`;
         break;
     }
     return prompt;
   };
 
-  // function to send post to OpenAI and get response
+  // Função para enviar o post para o OpenAI e obter a resposta
   const optimizePost = async (e: any) => {
     e.preventDefault();
     setOptimizedPost("");
     setLoading(true);
     const prompt = handlePrompt();
 
-    // Show the popup right before the API call
+    // Mostrar o popup imediatamente antes da chamada da API
     handleButtonClick();
 
     const response = await fetch("/api/optimize", {
@@ -108,7 +106,7 @@ export default function Home() {
       throw new Error(response.statusText);
     }
 
-    // This data is a ReadableStream
+    // Estes dados são um ReadableStream
     const data = response.body;
     if (!data) {
       return;
@@ -131,24 +129,24 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>LinkedIn Post Generator</title>
+        <title>Gerador de Postagens do LinkedIn</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="👩‍💼" />
         <meta
           name="description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="Veja como sua postagem se sai em relação ao algoritmo do LinkedIn e gere uma postagem melhor com IA."
         />
-        <meta property="og:site_name" content="#1 Post Generator 🚀  " />
+        <meta property="og:site_name" content="#1 Gerador de Postagens 🚀  " />
         <meta
           property="og:description"
-          content="See how your post performs against LinkedIn alghoritm and generate better post with AI."
+          content="Veja como sua postagem se sai em relação ao algoritmo do LinkedIn e gere uma postagem melhor com IA."
         />
-        <meta property="og:title" content="LinkedIn Post Generator with AI" />
+        <meta property="og:title" content="Gerador de Postagens do LinkedIn com IA" />
         <meta name="linkedin:card" content="summary_large_image" />
-        <meta name="linkedin:title" content="Linkedin Post Generator" />
+        <meta name="linkedin:title" content="Gerador de Postagens do Linkedin" />
         <meta
           name="linkedin:description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="Veja como sua postagem se sai em relação ao algoritmo do LinkedIn e gere uma postagem melhor com IA."
         />
         <meta
           property="og:image"
@@ -174,18 +172,18 @@ export default function Home() {
                   rel="noreferrer"
                   className="border border-gray-700 rounded-lg py-2 px-4 text-gray-400 text-sm mb-8 transition duration-300 ease-in-out"
                 >
-                  40.000 amazing posts generated 💫
+                  40.000 postagens incríveis geradas 💫
                   {/* {" "}
                   <span className="text-blue-600">Vercel</span> */}
                 </a>
               </div>
 
               <h1 className="text-6xl text-center font-bold pb-1 text-slate-900  ">
-                Linkedin Post Generator 🚀
+                Gerador de Postagens do LinkedIn 🚀
               </h1>
               <p className="mt-3 mb-10 text-center">
-                See how your post performs and generate a better one with AI.
-                Time to go viral. <br />
+                Veja como sua postagem se sai e gere uma melhor com IA.
+                Hora de ficar viral. <br />
               </p>
 
               <div className="flex flex-col md:flex-row w-full md:space-x-20">
@@ -204,14 +202,14 @@ export default function Home() {
                     <DropDown2 vibe2={vibe2} setVibe2={setVibe2} />
                   </div>
 
-                  {/* // This is post component*/}
+                  {/* // Este é o componente do post */}
 
                   <div className="w-full mx-auto pt-6 ">
                     <div className="w-full">
                       <textarea
                         maxLength={2000}
                         onChange={(e) => setPost(e.target.value)}
-                        placeholder="Type or copy your ready to be enchanced post "
+                        placeholder="Digite ou copie sua postagem pronta para ser aprimorada "
                         className="text-black w-full h-72 p-2 text-s bg-white border border-gray-300 rounded-md shadow-inner md:h-240"
                       />
                     </div>
@@ -227,7 +225,7 @@ export default function Home() {
                       className="bg-blue-700 font-medium rounded-md w-full text-white px-4 py-2 hover:bg-blue-600 disabled:bg-blue-800"
                     >
                       {loading && <LoadingDots color="white" style="large" />}
-                      {!loading && `Generate new post `}
+                      {!loading && `Gerar nova postagem `}
                     </button>
 
                     <Popup show={showPopup} setShowPopup={setShowPopup} />
@@ -243,7 +241,7 @@ export default function Home() {
                     <div className="my-1">
                       <div className="flex justify-between items-center pb-2 border-b border-gray-300">
                         <h2 className="text-xl font-bold">
-                          Your Generated Post
+                          Sua Postagem Gerada
                         </h2>
                       </div>
                       <div className="max-w-2xl my-4 mx-auto">
@@ -257,7 +255,7 @@ export default function Home() {
                                 }),
                               }),
                             ]);
-                            toast("Post copied to clipboard", {
+                            toast("Postagem copiada para a área de transferência", {
                               icon: "📋",
                             });
                           }}

@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import CustomButton from "@/components/CustomButton";
-
 import { Ranking } from "@/components/Ranking";
 import { rank } from "@/lib/linkedin-algorithm";
 import { Toaster, toast } from "react-hot-toast";
@@ -31,7 +30,7 @@ export default function Home() {
   });
   const [post, setPost] = useState<string>("");
   const [media, setMedia] = useState<boolean>(false);
-  const [vibe, setVibe] = useState<VibeType>("Story");
+  const [vibe, setVibe] = useState<VibeType>("Historia");
   const [showPopup, setShowPopup] = useState(false);
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
   const [customPrompt, setCustomPrompt] = useState("");
@@ -48,62 +47,47 @@ export default function Home() {
     }
   };
 
-  // const [hasVideo, setHasVideo] = useState<boolean>(false);
-  // const [hasCarousel, setHasCarousel] = useState<boolean>(false);
-
   useEffect(() => {
     const rankResponse = rank(post, media);
     setRanking(rankResponse);
   }, [post, media]);
 
-  // prompt for optimizing post
-
-  // add more vibes as needed
   const handlePrompt = () => {
     let prompt;
     switch (vibe) {
-      case "Story":
-        prompt = `Generate 10 ideas for posts based on topics in ${post}. If person select this ${vibe}, make sure the generatedideas are for post on formats story.  
-        There one line space between each idea and Each should start from new line. The story should be from the person`;
-
+      case "Historia":
+        prompt = `Gerar 10 ideias de postagens com base nos tópicos em ${post}. Se a pessoa selecionar essa ${vibe}, certifique-se de que as ideias geradas sejam para postagens no formato de histórias.
+        Deve haver um espaço entre cada ideia, e cada ideia deve começar em uma nova linha. A história deve ser escrita a partir da perspectiva da pessoa.`;
         break;
-      case "Crisp":
-        prompt = `Generate 10 ideas for posts based on topics in ${post}. If person select this ${vibe}, make sure the generated ideas are for post on format of short list 
-        There one line space between each idea and Each should start from new line. The story should be from the person`;
-
+      case "Nitida":
+        prompt = `Gerar 10 ideias de postagens com base nos tópicos em ${post}. Se a pessoa selecionar essa ${vibe}, certifique-se de que as ideias geradas sejam para postagens no formato de listas curtas.
+        Deve haver um espaço entre cada ideia, e cada ideia deve começar em uma nova linha. A história deve ser escrita a partir da perspectiva da pessoa.`;
         break;
-
-      case "List":
-        prompt = `Generate 10 ideas for posts based on topics in ${post}. If person select this ${vibe}, make sure the generatedideas are for posts in frmat of lists, 10 things, 50 smth..  
-        There one line space between each idea and Each should start from new line. The story should be from the person`;
-
-        // Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin.
-
+      case "Lista":
+        prompt = `Gerar 10 ideias de postagens com base nos tópicos em ${post}. Se a pessoa selecionar essa ${vibe}, certifique-se de que as ideias geradas sejam para postagens no formato de listas, como "10 coisas para fazer" ou "50 maneiras de melhorar".
+        Deve haver um espaço entre cada ideia, e cada ideia deve começar em uma nova linha. A história deve ser escrita a partir da perspectiva da pessoa.`;
         break;
-      case "Unpopular opinion":
-        prompt = `Generate 10 ideas for posts based on topics in ${post}. If person select this ${vibe}, make sure the generatedideas are for posts in contradictory ideas..  
-        There one line space between each idea and Each should start from new line. The story should be from the person`;
+      case "Opinião impopular":
+        prompt = `Gerar 10 ideias de postagens com base nos tópicos em ${post}. Se a pessoa selecionar essa ${vibe}, certifique-se de que as ideias geradas sejam para postagens que apresentem opiniões contraditórias ou impopulares.
+        Deve haver um espaço entre cada ideia, e cada ideia deve começar em uma nova linha. A história deve ser escrita a partir da perspectiva da pessoa.`;
         break;
-
-      case "Case Study":
-        prompt = `Generate 10 ideas for posts based on topics in ${post}. If person select this ${vibe}, make sure the generatedideas are for posts in format of case studies.  
-        There one line space between each idea and Each should start from new line. The story should be from the person`;
+      case "Estudo de caso":
+        prompt = `Gerar 10 ideias de postagens com base nos tópicos em ${post}. Se a pessoa selecionar essa ${vibe}, certifique-se de que as ideias geradas sejam para postagens no formato de estudos de caso.
+        Deve haver um espaço entre cada ideia, e cada ideia deve começar em uma nova linha. A história deve ser escrita a partir da perspectiva da pessoa.`;
         break;
       default:
-        prompt = `Default prompt for generating ideas`;
+        prompt = `Prompt padrão para gerar ideias`;
         break;
     }
     return prompt;
   };
 
-  // function to send post to OpenAI and get response
   const optimizePost = async (e: any) => {
     e.preventDefault();
     setOptimizedPost("");
     setLoading(true);
     const prompt = handlePrompt();
 
-    // Show the popup right before the API call
     handleButtonClick();
 
     const response = await fetch("/api/optimize", {
@@ -120,7 +104,6 @@ export default function Home() {
       throw new Error(response.statusText);
     }
 
-    // This data is a ReadableStream
     const data = response.body;
     if (!data) {
       return;
@@ -148,19 +131,19 @@ export default function Home() {
         <link rel="icon" href="👩‍💼" />
         <meta
           name="description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="Veja como suas postagens se saem no algoritmo do LinkedIn e gere postagens melhores com a IA."
         />
-        <meta property="og:site_name" content="#1 Post Generator 🚀  " />
+        <meta property="og:site_name" content="#1 Post Generator 🚀" />
         <meta
           property="og:description"
-          content="See how your post performs against LinkedIn alghoritm and generate better post with AI."
+          content="Veja como suas postagens se saem no algoritmo do LinkedIn e gere postagens melhores com a IA."
         />
-        <meta property="og:title" content="LinkedIn Post Generator with AI" />
+        <meta property="og:title" content="LinkedIn Post Generator com IA" />
         <meta name="linkedin:card" content="summary_large_image" />
-        <meta name="linkedin:title" content="Linkedin Post Generator" />
+        <meta name="linkedin:title" content="LinkedIn Post Generator" />
         <meta
           name="linkedin:description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="Veja como suas postagens se saem no algoritmo do LinkedIn e gere postagens melhores com a IA."
         />
         <meta
           property="og:image"
@@ -176,7 +159,6 @@ export default function Home() {
         <Nav />
 
         <section className="py-10 lg:py-20 ">
-          {/* bg-[url('/image1.svg')] */}
           <div className="px-4 ">
             <div className="max-w-5xl mx-auto text-center">
               <div className="w-full mx-auto mb-6 ">
@@ -186,18 +168,16 @@ export default function Home() {
                   rel="noreferrer"
                   className="border border-gray-700 rounded-lg py-2 px-4 text-gray-400 text-sm mb-8 transition duration-300 ease-in-out"
                 >
-                  40.000 amazing posts generated 💫
-                  {/* {" "}
-                  <span className="text-blue-600">Vercel</span> */}
+                  40.000 postagens incríveis geradas 💫
                 </a>
               </div>
 
               <h1 className="text-6xl text-center font-bold pb-1 text-slate-900  ">
-                Linkedin Post Generator 🚀
+                Gerador de Postagens para o LinkedIn 🚀
               </h1>
               <p className="mt-3 mb-10 text-center">
-                Generate awesome post ideas and get a lot of posts done. Time to
-                go viral. <br />
+                Gere ideias incríveis de postagens e faça muitas postagens.
+                Hora de se tornar viral. <br />
               </p>
 
               <div className="flex flex-col md:flex-row w-full md:space-x-20">
@@ -211,14 +191,12 @@ export default function Home() {
                     `}</style>
                   </div>
 
-                  {/* // This is post component*/}
-
                   <div className="w-full mx-auto pt-6 ">
                     <div className="w-full">
                       <textarea
                         maxLength={2000}
                         onChange={(e) => setPost(e.target.value)}
-                        placeholder="Type or copy your topic on which you plan to write posts"
+                        placeholder="Digite ou copie o tópico sobre o qual você planeja escrever postagens"
                         className="text-black w-full h-24 p-2 text-s bg-white border border-gray-300 rounded-md shadow-inner md:h-240"
                       />
                     </div>
@@ -239,7 +217,7 @@ export default function Home() {
                       className="bg-blue-700 font-medium rounded-md w-full text-white px-4 py-2 hover:bg-blue-600 disabled:bg-blue-800"
                     >
                       {loading && <LoadingDots color="white" style="large" />}
-                      {!loading && `Generate list of ideas`}
+                      {!loading && `Gerar lista de ideias`}
                     </button>
 
                     <Popup show={showPopup} setShowPopup={setShowPopup} />
@@ -255,7 +233,7 @@ export default function Home() {
                     <div className="my-1">
                       <div className="flex justify-between items-center pb-2 border-b border-gray-300">
                         <h2 className="text-xl font-bold">
-                          Your Generated Ideas
+                          Suas Ideias Geradas
                         </h2>
                       </div>
                       <div className="max-w-2xl my-4 mx-auto">
@@ -269,7 +247,7 @@ export default function Home() {
                                 }),
                               }),
                             ]);
-                            toast("Ideas copied to clipboard", {
+                            toast("Ideias copiadas para a área de transferência", {
                               icon: "📋",
                             });
                           }}

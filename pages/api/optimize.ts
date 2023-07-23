@@ -1,7 +1,7 @@
 import { OpenAIStream, OpenAIStreamPayload } from "@/utils/OpenAIStream";
 
 if (!process.env.OPENAI_API_KEY) {
-  throw new Error("Missing env var from OpenAI");
+  throw new Error("Variável de ambiente OPENAI_API_KEY não encontrada");
 }
 
 export const config = {
@@ -14,11 +14,11 @@ const handler = async (req: Request): Promise<Response> => {
   };
 
   if (!prompt) {
-    return new Response("No prompt in the request", { status: 400 });
+    return new Response("Nenhum prompt na requisição", { status: 400 });
   }
 
   const payload: OpenAIStreamPayload = {
-    model: "gpt-3.5-turbo",
+    model: "gpt-3.5-turbo-16k",
     messages: [{ role: "user", content: prompt }],
     temperature: 0.7,
     top_p: 1,

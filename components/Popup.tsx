@@ -16,16 +16,16 @@ function Popup({ show, setShowPopup }: PopupProps) {
     <div className="fixed z-50 top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white rounded p-6 w-full max-w-3xl ring-1 ring-inset ring-gray-900/5 m-4">
         <h1 className="text-4xl font-bold mt-6 mb-10 text-center">
-          Upgrade to get unlimited access 🚀
+          Faça o upgrade para obter acesso ilimitado 🚀
         </h1>
         <div className="grid gap-6 md:grid-cols-2">
           <div className="mx-auto max-w-xs p-6 ring-1 ring-inset ring-gray-900/5 rounded-2xl">
             <p className="text-base font-semibold text-gray-600">
               {" "}
-              🥷 Posting Ninja
+              🥷 Ninja das Postagens
             </p>
             <p className="text-gray-600 text-sm">
-              12 months on unlimited post generations✨
+              12 meses de gerações de postagens ilimitadas✨
             </p>
             <p className="mt-6 flex items-baseline justify-center gap-x-2">
               <span className="text-5xl font-bold tracking-tight text-gray-900">
@@ -42,15 +42,15 @@ function Popup({ show, setShowPopup }: PopupProps) {
                 )
               }
             >
-              Subscribe
+              Inscrever-se
             </button>
           </div>
           <div className="mx-auto max-w-xs p-6 ring-1 ring-inset ring-gray-900/5 rounded-2xl">
             <p className="text-base font-semibold text-gray-600">
-              🦸‍♀️Posting Hero
+              🦸‍♀️ Herói das Postagens
             </p>
             <p className="text-gray-600 text-sm">
-              3 months of unlimited post generations✨
+              3 meses de gerações de postagens ilimitadas✨
             </p>
             <p className="mt-6 flex items-baseline justify-center gap-x-2">
               <span className="text-5xl font-bold tracking-tight text-gray-900">
@@ -68,18 +68,18 @@ function Popup({ show, setShowPopup }: PopupProps) {
                 )
               }
             >
-              Subscribe
+              Inscrever-se
             </button>
           </div>
         </div>
         <p className="text-sm mt-6 text-center text-gray-500">
-          And you will never see this popup again 😜
+          E você nunca verá este pop-up novamente 😜
         </p>
         <button
           onClick={handleCloseClick}
-          className=" mt-6 block w-full rounded-md bg-black text-white px-4 py-2 text-center text-sm font-semibold"
+          className="mt-6 block w-full rounded-md bg-black text-white px-4 py-2 text-center text-sm font-semibold"
         >
-          Continue without upgrade
+          Continuar sem fazer o upgrade
         </button>
       </div>
     </div>

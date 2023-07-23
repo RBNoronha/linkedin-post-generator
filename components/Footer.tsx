@@ -30,9 +30,9 @@ export default function Footer() {
       </div>
       <div className="flex space-x-4 pb-4 sm:pb-0">
         <Link
-          href="https://twitter.com/shnai0"
+          href="https://twitter.com/BesserraRenan"
           className="group"
-          aria-label="@mfts0 on Twitter"
+          aria-label="@BesserraRenan on Twitter"
         >
           <svg
             aria-hidden="true"
@@ -43,9 +43,9 @@ export default function Footer() {
         </Link>
 
         <Link
-          href="https://github.com/shnai0/linkedin-booster"
+          href="https://github.com/RBNoronha"
           className="group"
-          aria-label="@shnai0 on GitHub"
+          aria-label="@RBNoronha on GitHub"
         >
           <svg
             aria-hidden="true"
@@ -56,9 +56,9 @@ export default function Footer() {
         </Link>
 
         <Link
-          href="https://www.linkedin.com/in/iuliia-shnai/"
+          href="https://www.linkedin.com/in/renanbesserra/"
           className="group"
-          aria-label="@your-linkedin-username on LinkedIn"
+          aria-label="@RenanBesserra on LinkedIn"
         >
           <svg
             aria-hidden="true"

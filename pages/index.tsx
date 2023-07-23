@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
-import CustomButton from "@/components/CustomButton"; // adjust the import path according to your file structure
+import CustomButton from "@/components/CustomButton"; // ajuste o caminho de importação de acordo com sua estrutura de arquivos
 import { useSession } from "next-auth/react";
 import { rank } from "@/lib/linkedin-algorithm";
 import { Toaster, toast } from "react-hot-toast";
@@ -29,16 +29,16 @@ export default function Home() {
   });
   const [post, setPost] = useState<string>("");
   const [media, setMedia] = useState<boolean>(false);
-  const [vibe, setVibe] = useState<VibeType>("Story");
+  const [vibe, setVibe] = useState<VibeType>("Historia");
   const [showPopup, setShowPopup] = useState(false);
   const [isCustomPrompt, setIsCustomPrompt] = useState(false);
   const [customPrompt, setCustomPrompt] = useState("");
-  const [tab, setTab] = useState("vibe"); // Default to "vibe" tab
+  const [tab, setTab] = useState("vibe"); // Padrão para a aba "vibe"
   const { data: session, status } = useSession();
   const clickCount = useRef(0);
 
   const handleButtonClick = () => {
-    clickCount.current += 1; // Increment clickCount on each click
+    clickCount.current += 1; // Incrementa clickCount a cada clique
     if (status !== "authenticated" && clickCount.current >= 3) {
       setTimeout(() => {
         setShowPopup(true);
@@ -54,134 +54,106 @@ export default function Home() {
     setRanking(rankResponse);
   }, [post, media]);
 
-  // prompt for optimizing post
+  // prompt para otimizar a postagem
 
-  // add more vibes as needed
+  // adicione mais vibes conforme necessário
   const handlePrompt = () => {
     let prompt;
     switch (vibe) {
-      case "Story":
-        prompt = `Generate post using this prompt, based on ${post}.  You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-The Linkedin algorithm contains boosts and demotions based on what you are writing. Positive boosts are:
+      case "Historia":
+        prompt = `Gere uma postagem usando este prompt, com base em ${post}. Você é um LinkedinGPT, um modelo de linguagem avançado que gera postagens virais para o LinkedIn. Você recebe um prompt de uma postagem e deve gerar uma postagem que tenha mais chances de ser curtida e compartilhada do que a postagem original.
+O algoritmo do LinkedIn contém impulsionamentos e demissões baseados no que você está escrevendo. Impulsionamentos positivos são:
 
-- in each post add emoji
-- 200 characters in sentence maximum
-- Start each sentecnce from new line and ad numbers in first 2 lines
-- add 3 hashtags which 2 are generic and one very specific (at the end) Tags relate to post theme
-- add a question at the end of the post to start a discussion. Before the hashtags
-- first two lines should be catchy
-- Dont add links - links are not good.
-- If post copied in the field contain some numbers keep them the same.
+- Em cada postagem, adicione emojis.
+- Máximo de 200 caracteres por sentença.
+- Inicie cada sentença em uma nova linha e adicione números nas primeiras 2 linhas.
+- Adicione 3 hashtags, sendo 2 genéricas e uma bem específica (no final). As tags devem estar relacionadas ao tema da postagem.
+- Adicione uma pergunta ao final da postagem para iniciar uma discussão. Antes das hashtags.
+- As duas primeiras linhas devem ser cativantes.
+- Não adicione links, pois links não são recomendados.
+- Se a postagem copiada no campo contiver alguns números, mantenha-os iguais.
 
-Add idea about which image or visual can be added at the end of the post (this text is not counted as part of post)
+Dê ideias sobre que imagem ou visual pode ser adicionado no final da postagem (esse texto não conta como parte da postagem)
 ${post}
 ---
-Generated post length must be more than 800-1200 characters
+O comprimento da postagem gerada deve ser de mais de 800 a 1200 caracteres
 ---
-Between each line must be a space
+Deve haver um espaço entre cada linha
 ---
-Keep all mentions of people in there
+Mantenha todas as menções de pessoas intactas
 ---
-Start the firs line from smth like: I did smth, In year, I do, Tired of, Sometimes it is just, A path toward, Because this is not,I've been struggling,  (change the begginign depends on the context )
+Inicie a primeira linha com algo como: "Eu fiz algo", "Em 2023, eu fiz", "Cansado de", "Às vezes é apenas", "Um caminho em direção a", "Porque isso não é", "Tenho lutado", (altere o início dependendo do contexto)
 ---
-Add emoji if it fits
+Adicione emojis, se adequado.
 ---
-It should be a story`;
+Deve ser uma história`;
         break;
-      case "Crisp":
-        prompt = `Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions and be short, crips and inspiring:
-- Post length must be no more than 500 characters. 
-- Each sentence length is less than 50 characters. 
-- First sentences must start with smth like that : I've spent 5 months, 10 step plan, I made 10000 In, Last January, this January, I was on .. , I created 1000 of, how to get 1000 followers, how to do 1000 of, 10 lessons took me,  15 reasons, 5 days ago, 3 shocking steps, my strategy for  2023, over the past 10 years. (change numbers, generate always new numbers, generate always new beggining). Next sentences should not include numbers and these formulations.  
-- If post copied in the field contain some numbers keep them the same.
-- Next sentences should be generated, should not include numbers.
+      case "Nitida":
+        prompt = `Gere uma postagem usando este prompt, com base em ${post}. Você é um LinkedinGPT, um modelo de linguagem avançado que gera postagens virais para o LinkedIn. Você recebe um prompt de uma postagem e deve gerar uma postagem que tenha mais chances de ser curtida e compartilhada do que a postagem original.
+O algoritmo do LinkedIn contém impulsionamentos e demissões baseados no que você está escrevendo. Se a pessoa selecionar esta ${vibe}, certifique-se de que a postagem gerada a partir de ${post} siga estas condições e seja curta, concisa e inspiradora:
+
+- O comprimento da postagem deve ser de no máximo 500 caracteres.
+- Cada sentença deve ter menos de 50 caracteres.
+- As primeiras sentenças devem começar com algo como: "Passei 5 meses", "Plano de 10 etapas", "Faturei 10.000 em", "Em janeiro passado, este janeiro", "Estive em...", "Criei 1000 de...", "Como obter 1000 seguidores", "Como fazer 1000 de...", "10 lições que me levaram", "15 razões", "Há 5 dias", "3 passos chocantes", "Minha estratégia para 2023", "Nos últimos 10 anos" (altere os números, gere sempre novos números, gere sempre novos começos). As próximas sentenças não devem conter números e essas formulações.
+- Se a postagem copiada no campo contiver alguns números, mantenha-os iguais.
+- As próximas sentenças devem ser geradas e não devem conter números.
 ---
-Each sentence from new line 
+Cada sentença em uma nova linha
 ---
-Add space between each abstract.
+Adicione espaço entre cada abstração.
 ---
-Show only generated post`;
+Mostre apenas a postagem gerada`;
 
         break;
-      case "List":
-        prompt = `Generate a post that is likely to be liked and reposted on LinkedIn, based on ${post}. Your post should follow these conditions:
+      case "Lista":
+        prompt = `Gere uma postagem que provavelmente será curtida e compartilhada no LinkedIn, com base em ${post}. Sua postagem deve seguir estas condições:
 
-Post length must be no more than one hundred characters.
-Each sentence length is no more than two words.
-Post is a list of things.
-First sentence must start with one of the following: There are 2 types of, 1 big mistake to avoid, When you..., avoid..., 5 quick tips..., Most companies..., If you don't plan to... (replace the ellipsis with a number).
-If the copied post contains numbers, keep them the same.
-The next sentences should be generated and should not include numbers.`;
-
-        // Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin.
-        //         ely to be liked and reposted than the original post.
-        // The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated ${post} must follow these conditions of having list and 1-2 sentences:
-        // - Post length must be no more than one hundred characters.
-        // - Each sentence length is less than twenty characters.
-        // - Post is a list of things
-        // - First sentences must start with: There are 2 types of, 1 big mistake make, When you, avoid, 5 quick tips, Most companies, If you don't plan to, (change numbers, generate always new numbers, only add in the first line of post). Next sentences should not include numbers and these formulations.
-        // - If post copied in the field contain some numbers keep them the same.
-        // - Next sentences should be generated, should not include numbers.
-        // ---
-        // Each sentence from new line
-        // ---
-        // Add space between each abstract.
-        // ---
-        // Show only generated post
-        // You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-        // s If person select this ${vibe}, make sure the generated ${post} must follow these conditions and be super short sentences from 1-2 words :
-        // - Post length must be no more than 100 characters or 100 words.
-        // - Each sentence length is less than twenty characters.
-        // - Add only one list, no more
-        // - Only one and fitst sentence of the  ${post}  must start with smth like that: There are 2 types of, 1 big mistake make, Most people think, What worked in the past might not, When you, avoid, 5 quick tips, Most companies, If you don't plan to, Behind every bad, Before asking (change numbers, generate always new numbers.  Next sentences should not include numbers and these formulations.
-        // - If post copied in the field contain some numbers keep them the same.
-        // - Next sentences should be generated
-        // ---
-        // Each sentence from new line
-        // ---
-        // Add space between each abstract.
-        // ---`;
+- O comprimento da postagem deve ser de no máximo cem caracteres.
+- Cada sentença deve ter no máximo duas palavras.
+- A postagem é uma lista de coisas.
+- A primeira sentença deve começar com uma das seguintes opções: "Existem 2 tipos de", "1 grande erro a evitar", "Quando você...", "Evite...", "5 dicas rápidas...", "A maioria das empresas...", "Se você não planeja..." (substitua os pontos suspensos por um número).
+- Se a postagem copiada no campo contiver números, mantenha-os iguais.
+- As próximas sentenças devem ser geradas e não devem conter números.`;
 
         break;
-      case "Unpopular opinion":
-        prompt = `Generate post using this prompt, based on ${post}. You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-        The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated post must follow these conditions and create an unpopular opinion about the topic:
-        - Post length must be less than 200 characters. 
-        - Post must contain no more tha 3 sentences 
-        - First sentence must start with: Unpopular opinion: 
-        ---
-        Add space between each abstract.`;
-        break;
-      case "Case Study":
-        prompt = `Generate post using this prompt, based on ${post}. person insert You are a LinkedinGPT, a large language model that generates viral posts for Linkedin. You are given a prompt of a post and must generate a post that is more likely to be liked and reposted than the original post.
-The Linkedin algorithm contains boosts and demotions based on what you are writing. If person select this ${vibe}, make sure the generated post must follow these conditions and be fullfilling and rigorous and realate to post typed:
-- Post must relate to what initially is inserted  
-- Post length must be no more than 1000 characters. 
-- Each sentence length is less than 200 characters. 
-- First sentence of the must start with smth like that, or similar text to one: Pro-tip, These simeple expereiments, Here is one of my biggest learnings from this year, Inside, Being ... does not mean, Earlier this year , This might be the hottest (use similar words) 
-- If post copied in the field contain some numbers keep them the same.
-- Next sentences should be generated, and contain list, rigorous list, each list point start from emoji
+      case "Opinião impopular":
+        prompt = `Gere uma postagem usando este prompt, com base em ${post}. Você é um LinkedinGPT, um modelo de linguagem avançado que gera postagens virais para o LinkedIn. Você recebe um prompt de uma postagem e deve gerar uma postagem que tenha mais chances de ser curtida e compartilhada do que a postagem original.
+Se a pessoa selecionar esta ${vibe}, certifique-se de que a postagem gerada siga estas condições e crie uma opinião impopular sobre o tópico:
+- O comprimento da postagem deve ser menor que 200 caracteres.
+- A postagem deve conter no máximo 3 sentenças.
+- A primeira sentença deve começar com: "Opinião impopular:"
 ---
-Provide the idea for graphics, image, sceme which will fuel these case study post at the end in the brackets
----s
-Add space between each abstract.`;
+Adicione espaço entre cada abstração.`;
+        break;
+      case "Estudo de caso":
+        prompt = `Gere uma postagem usando este prompt, com base em ${post}. Você é um LinkedinGPT, um modelo de linguagem avançado que gera postagens virais para o LinkedIn. Você recebe um prompt de uma postagem e deve gerar uma postagem que tenha mais chances de ser curtida e compartilhada do que a postagem original.
+Se a pessoa selecionar esta ${vibe}, certifique-se de que a postagem gerada siga estas condições e seja completa, rigorosa e relacionada ao post digitado:
+- A postagem deve ser relacionada ao que foi inicialmente inserido.
+- O comprimento da postagem deve ser de no máximo 1000 caracteres.
+- Cada sentença deve ter menos de 200 caracteres.
+- A primeira sentença deve começar com algo como: "Dica profissional", "Esses experimentos simples", "Aqui está uma das minhas maiores aprendizados deste ano", "Dentro, ser ... não significa", "No início deste ano", "Isto pode ser o mais quente" (use palavras similares).
+- Se a postagem copiada no campo contiver alguns números, mantenha-os iguais.
+- As próximas sentenças devem ser geradas e conter uma lista, lista rigorosa, em que cada ponto da lista começa com um emoji.
+---
+Forneça ideias para gráficos, imagens ou esquemas que complementem esta postagem de estudo de caso entre parênteses.
+---
+Adicione espaço entre cada abstração.`;
         break;
       default:
-        prompt = `Default prompt for optimizing post`;
+        prompt = `Prompt padrão para otimização de postagem`;
         break;
     }
     return prompt;
   };
 
-  // function to send post to OpenAI and get response
+  // função para enviar a postagem para o OpenAI e obter a resposta
   const optimizePost = async (e: any) => {
     e.preventDefault();
     setOptimizedPost("");
     setLoading(true);
     const prompt = handlePrompt();
 
-    // Show the popup right before the API call
+    // Mostrar o popup antes da chamada à API
     handleButtonClick();
 
     const response = await fetch("/api/optimize", {
@@ -198,7 +170,7 @@ Add space between each abstract.`;
       throw new Error(response.statusText);
     }
 
-    // This data is a ReadableStream
+    // Esses dados são um ReadableStream
     const data = response.body;
     if (!data) {
       return;
@@ -221,24 +193,24 @@ Add space between each abstract.`;
   return (
     <>
       <Head>
-        <title>LinkedIn Post Generator</title>
+        <title>Gerador de Postagens para LinkedIn</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="👩‍💼" />
         <meta
           name="description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="Veja como sua postagem se sai em relação ao algoritmo do LinkedIn e gere uma postagem melhor com a IA."
         />
-        <meta property="og:site_name" content="#1 Post Generator 🚀  " />
+        <meta property="og:site_name" content="#1 Gerador de Postagens 🚀" />
         <meta
           property="og:description"
-          content="See how your post performs against LinkedIn alghoritm and generate better post with AI."
+          content="Veja como sua postagem se sai em relação ao algoritmo do LinkedIn e gere uma postagem melhor com a IA."
         />
-        <meta property="og:title" content="LinkedIn Post Generator with AI" />
+        <meta property="og:title" content="Gerador de Postagens para LinkedIn com IA" />
         <meta name="linkedin:card" content="summary_large_image" />
-        <meta name="linkedin:title" content="Linkedin Post Generator" />
+        <meta name="linkedin:title" content="Gerador de Postagens para LinkedIn" />
         <meta
           name="linkedin:description"
-          content="See how your post performs against Linkedin alghoritm and generate better post with AI."
+          content="Veja como sua postagem se sai em relação ao algoritmo do LinkedIn e gere uma postagem melhor com a IA."
         />
         <meta
           property="og:image"
@@ -264,18 +236,18 @@ Add space between each abstract.`;
                   rel="noreferrer"
                   className="border border-gray-700 rounded-lg py-2 px-4 text-gray-400 text-sm mb-8 transition duration-300 ease-in-out"
                 >
-                  40.000 amazing posts generated 💫
+                  40.000 postagens incríveis geradas 💫
                   {/* {" "}
                   <span className="text-blue-600">Vercel</span> */}
                 </a>
               </div>
 
               <h1 className="text-6xl text-center font-bold pb-1 text-slate-900  ">
-                Linkedin Post Generator 🚀
+                Gerador de Postagens para LinkedIn 🚀
               </h1>
               <p className="mt-3 mb-10 text-center">
-                See how your post performs and generate a better one with AI.
-                Time to go viral. <br />
+                Veja como sua postagem se sai e gere uma melhor com a IA.
+                Hora de se tornar viral. <br />
               </p>
 
               <div className="flex flex-col md:flex-row w-full md:space-x-20">
@@ -289,14 +261,14 @@ Add space between each abstract.`;
                     `}</style>
                   </div>
 
-                  {/* // This is post component*/}
+                  {/* // Este é o componente de postagem */}
 
                   <div className="w-full mx-auto pt-6 ">
                     <div className="w-full">
                       <textarea
                         maxLength={2000}
                         onChange={(e) => setPost(e.target.value)}
-                        placeholder="Type or copy your post or idea here "
+                        placeholder="Digite ou copie sua postagem ou ideia aqui "
                         className="text-black w-full h-56 p-2 text-s bg-white border border-gray-300 rounded-md shadow-inner md:h-240"
                       />
                     </div>
@@ -317,7 +289,7 @@ Add space between each abstract.`;
                       className="bg-blue-700 font-medium rounded-md w-full text-white px-4 py-2 hover:bg-blue-600 disabled:bg-blue-800"
                     >
                       {loading && <LoadingDots color="white" style="large" />}
-                      {!loading && `Generate new post `}
+                      {!loading && `Gerar nova postagem`}
                     </button>
 
                     <Popup show={showPopup} setShowPopup={setShowPopup} />
@@ -333,7 +305,7 @@ Add space between each abstract.`;
                     <div className="my-1">
                       <div className="flex justify-between items-center pb-2 border-b border-gray-300">
                         <h2 className="text-xl font-bold">
-                          Your Generated Post
+                          Sua Postagem Gerada
                         </h2>
                       </div>
                       <div className="max-w-2xl my-4 mx-auto">
@@ -347,7 +319,7 @@ Add space between each abstract.`;
                                 }),
                               }),
                             ]);
-                            toast("Post copied to clipboard", {
+                            toast("Postagem copiada para a área de transferência", {
                               icon: "📋",
                             });
                           }}

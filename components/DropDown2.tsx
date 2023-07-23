@@ -1,36 +1,32 @@
 import { Menu, Transition } from "@headlessui/react";
-import {
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@heroicons/react/20/solid";
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
 import { Fragment, Dispatch, SetStateAction } from "react";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export type VibeType2 =
-  | "➕ Add Hashtags"
-  | "➕ Add Emoji"
-  | "➕ Add a List"
-  | "➕ Add Stats"
-  | "➕ Add a Question";
+export type TipoVibe2 =
+  | "➕ Adicionar Hashtags"
+  | "➕ Adicionar Emoji"
+  | "➕ Adicionar uma Lista"
+  | "➕ Adicionar Estatísticas"
+  | "➕ Adicionar uma Pergunta";
 
-interface DropDown2Props {
-  vibe2: VibeType2;
-  setVibe2: Dispatch<SetStateAction<VibeType2>>;
+interface PropsDropDown2 {
+  vibe2: TipoVibe2;
+  setVibe2: Dispatch<SetStateAction<TipoVibe2>>;
 }
 
-let vibes2: VibeType2[] = [
-  "➕ Add Hashtags",
-  "➕ Add Emoji",
-  "➕ Add a List",
-  "➕ Add Stats",
-  "➕ Add a Question",
+let vibes2: TipoVibe2[] = [
+  "➕ Adicionar Hashtags",
+  "➕ Adicionar Emoji",
+  "➕ Adicionar uma Lista",
+  "➕ Adicionar Estatísticas",
+  "➕ Adicionar uma Pergunta",
 ];
 
-export default function DropDown2({ vibe2, setVibe2 }: DropDown2Props) {
+export default function DropDown2({ vibe2, setVibe2 }: PropsDropDown2) {
   return (
     <Menu as="div" className="relative block text-left w-full">
       <div>
